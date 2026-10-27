@@ -1,6 +1,6 @@
 # Order & Inventory Management Service
 
-![CI](https://github.com/YOUR_GITHUB_USERNAME/order-inventory-service/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/Sivaprasadkilari123/order-inventory-service/actions/workflows/ci.yml/badge.svg)
 
 REST API for multi-warehouse inventory, customers and orders, built with **FastAPI** and **MySQL**.
 
