@@ -2,7 +2,7 @@ import os
 
 import pytest
 from sqlalchemy import create_engine, text
-from sqlalchemy.engine import make_url
+from sqlalchemy.engine import URL, make_url
 
 TEST_DATABASE_URL = os.getenv(
     "TEST_DATABASE_URL",
@@ -18,7 +18,16 @@ os.environ["DATABASE_URL"] = TEST_DATABASE_URL
 
 
 def _create_test_database():
-    server_engine = create_engine(_url.set(database=None), isolation_level="AUTOCOMMIT")
+    server_engine = create_engine(
+        URL.create(
+            _url.drivername,
+            username=_url.username,
+            password=_url.password,
+            host=_url.host,
+            port=_url.port,
+        ),
+        isolation_level="AUTOCOMMIT",
+    )
     with server_engine.connect() as conn:
         conn.execute(text(f"CREATE DATABASE IF NOT EXISTS `{_url.database}`"))
     server_engine.dispose()
